@@ -1,0 +1,38 @@
+# Xcode build artifacts
+build/
+DerivedData/
+*.xcuserstate
+*.xcworkspace/xcuserdata/
+
+# Xcode per-user settings (contain local paths, not project data)
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.mode1
+*.perspectivev3
+xcuserdata/
+
+# VTK static libraries (too large; see setup docs for how to obtain them)
+*.a
+
+# Compiled plugin bundles
+*.osirixplugin
+*.horosPlugin
+
+# SVN metadata (project was originally in SVN)
+.svn/
+
+# macOS
+.DS_Store
+**/.DS_Store
+*.mov
+*.zip
+
+# Compiled AppleScript bytecode
+*.scpt
+
+# Object files
+*.o
+*.dep
+*.hmap
+*.LinkFileList

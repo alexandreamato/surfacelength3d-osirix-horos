@@ -1,0 +1,75 @@
+{\rtf1\ansi\ansicpg1252\cocoartf949\cocoasubrtf350
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww16020\viewh11920\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\f0\b\fs28 \cf0 SurfaceLength3D Xcode Project Setup
+\b0\fs24 \
+\
+The project needs to have the VTK libraries added to it as well as knowing where to find the VTK header files.\
+\
+
+\b Step 1
+\b0  - Clear my settings
+\b \
+
+\b0 \
+Clear the library and header search paths from the project I sent you (as the paths will differ between our systems). \
+To do this:\
+\
+a) Display the Target Info window (use Xcode's menu Project->Edit Active Target "SurfaceLength3D") and select the Build tab and Deployment configuration.\
+\
+b) Type "search" into the target info search bar to narrow the list down.\
+\
+c) You will either see entries for "Header Search Paths" and "Library Search Paths" or as user-define LIBRARY_SEARCH_PATHS......\
+Clear these search paths.\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+\cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
+
+\b \cf0 Step 2
+\b0  - OsiriX source
+\b \
+
+\b0 \
+Download the OsiriX source. The VTK library and header files are available when you download the source code for OsiriX. \
+Follow the instructions at:\
+http://osirix.svn.sourceforge.net/viewvc/osirix/Documentation/Developers%20Guide/index.html#Getting_OsiriX_Source_Code\
+\
+\
+
+\b Step 3
+\b0  - VTK Library files\
+\
+Once downloaded go to the folder "osirix/osirix/Binaries". \
+In this folder you will find a file named "VTKLibs.zip". \
+Double click this file to unzip the VTK library files.\
+You can now add all the VTK library files (eg libvtkCommon.a etc) into the plugin project. Drag the VTKLibs folder containing the library files into Xcode's "Groups & Files" window.\
+\
+\
+
+\b Step 4 - 
+\b0 VTK Header files\
+\
+Also in the OsiriX source that you downloaded will be a file called VTKHeaders.zip. Unzip this. \
+\
+Display the Target Info window again and display the search paths.\
+The Library search path should now point to the VTKLibs folder on your system.\
+Add the path to VTKHeaders folder to the "Headers Search Paths".\
+\
+
+\b Misc\
+
+\b0 \
+In the Groups & Files view of the project you'll see I've created an "OsiriX Headers" folder with a dozen or more OsiriX header files. I don't think these are necessary so you can remove them if you wish.\
+\
+SO.... when you build the project, Xcode now knows where to find the VTK library and header files. \
+This should work fine for a 32-bit plugin. I don't know if your 64-bit version of OsiriX has 64-bit versions of the VTK libraries or not.\
+\
+\
+\
+\
+\
+}

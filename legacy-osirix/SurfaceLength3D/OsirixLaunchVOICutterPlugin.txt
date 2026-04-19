@@ -1,0 +1,19 @@
+tell application "System Events"
+	tell process "OsiriX"
+		tell menu bar 1
+			tell menu bar item "Plugins"
+				tell menu "Plugins"
+					tell menu item "Others"
+						tell menu "Others"
+							tell menu item "CMIV_CTA_TOOLS"
+								tell menu "CMIV_CTA_TOOLS"
+									click menu item "VOI Cutter"
+								end tell
+							end tell
+						end tell
+					end tell
+				end tell
+			end tell
+		end tell
+	end tell
+end tell
