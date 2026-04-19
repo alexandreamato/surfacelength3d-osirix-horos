@@ -18,11 +18,11 @@
 
 #import "ProcessWindowController.h"
 #import "SurfaceLength3DFilter.h"
-#import <OsiriXAPI/ViewerController.h>
+#import <Horos/ViewerController.h>
 #import "GeodesicProcessor.h"
 #import "PointPair.h"
-#import <OsiriXAPI/ROI.h>
-#import <OsiriXAPI/DCMPix.h>
+#import <Horos/ROI.h>
+#import <Horos/DCMPix.h>
 #import "Constants.h"
 #import "AnatomicalLabelSet.h"
 #import "MeasurementExporter.h"

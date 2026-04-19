@@ -1,0 +1,289 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0D05BD23DE599A0736FBECE5 /* SurfaceLength3DFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C511FA8F3A8172E0F6E214 /* SurfaceLength3DFilter.m */; };
+		84C1A988C0554FE853299F89 /* AnatomicalLabelSet.m in Sources */ = {isa = PBXBuildFile; fileRef = EFD84C24E77A19793A3AEFB8 /* AnatomicalLabelSet.m */; };
+		E50D1650FE5BA905E05D8AE2 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DC5518568093CB9A03DDBDB /* Constants.m */; };
+		284E42F0EA3E096A8E614C2F /* GeodesicProcessor.mm in Sources */ = {isa = PBXBuildFile; fileRef = B6DBE6A5FE88BA083E1B5D5B /* GeodesicProcessor.mm */; };
+		54EB2EBCBEA12B90E65D1683 /* MeasurementExporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B13BC265B4E43EF24522CCA /* MeasurementExporter.m */; };
+		D200F86E54EF52FDBB1A00FE /* PointPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC902918BF8415429F7E703 /* PointPair.m */; };
+		23C82C7A670FA25C80A6F925 /* ProcessWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73EF6C869D74B71D9F5D59C0 /* ProcessWindowController.m */; };
+		3067FFDEB930A5F3F860E8B3 /* ReportView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA29380EA5EBEF06BEF8017E /* ReportView.m */; };
+		82118C48E126C5734A7ADF70 /* ReportWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3802412FB23946049DDEF0 /* ReportWindowController.m */; };
+		973C0D4938AB5AB756CF3C48 /* ValidationPhantom.mm in Sources */ = {isa = PBXBuildFile; fileRef = A338CF5BD00C14EA8930992F /* ValidationPhantom.mm */; };
+		AC4C4972A5A3E5C82ABE5B09 /* VascularPlanningReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B9FEB4E77C2D767A0E74B7 /* VascularPlanningReport.m */; };
+		26A7281448311570629EA47F /* WizardWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = BCFB843499C34C667BCFAA4F /* WizardWindowController.m */; };
+		46EB64C16DC78200F3E4E4C3 /* Horos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C4689F594D0618E79AA02D /* Horos.framework */; };
+		F3B4E9F1B5D4A6EAF93AA22E /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FFFE67AEAE1C840D4B2940F /* AppKit.framework */; };
+		8C290BB75B185FE0EFB3891C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F57E1E8A5103D7AF58ADA93E /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		01C511FA8F3A8172E0F6E214 /* SurfaceLength3DFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SurfaceLength3DFilter.m"; path = "SurfaceLength3DFilter.m"; sourceTree = "<group>"; };
+		EFD84C24E77A19793A3AEFB8 /* AnatomicalLabelSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AnatomicalLabelSet.m"; path = "Classes/AnatomicalLabelSet.m"; sourceTree = "<group>"; };
+		6DC5518568093CB9A03DDBDB /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Constants.m"; path = "Classes/Constants.m"; sourceTree = "<group>"; };
+		B6DBE6A5FE88BA083E1B5D5B /* GeodesicProcessor.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "GeodesicProcessor.mm"; path = "Classes/GeodesicProcessor.mm"; sourceTree = "<group>"; };
+		1B13BC265B4E43EF24522CCA /* MeasurementExporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MeasurementExporter.m"; path = "Classes/MeasurementExporter.m"; sourceTree = "<group>"; };
+		1AC902918BF8415429F7E703 /* PointPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PointPair.m"; path = "Classes/PointPair.m"; sourceTree = "<group>"; };
+		73EF6C869D74B71D9F5D59C0 /* ProcessWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ProcessWindowController.m"; path = "Classes/ProcessWindowController.m"; sourceTree = "<group>"; };
+		CA29380EA5EBEF06BEF8017E /* ReportView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ReportView.m"; path = "Classes/ReportView.m"; sourceTree = "<group>"; };
+		0D3802412FB23946049DDEF0 /* ReportWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ReportWindowController.m"; path = "Classes/ReportWindowController.m"; sourceTree = "<group>"; };
+		A338CF5BD00C14EA8930992F /* ValidationPhantom.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "ValidationPhantom.mm"; path = "Classes/ValidationPhantom.mm"; sourceTree = "<group>"; };
+		67B9FEB4E77C2D767A0E74B7 /* VascularPlanningReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "VascularPlanningReport.m"; path = "Classes/VascularPlanningReport.m"; sourceTree = "<group>"; };
+		BCFB843499C34C667BCFAA4F /* WizardWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "WizardWindowController.m"; path = "Classes/WizardWindowController.m"; sourceTree = "<group>"; };
+		67067FB4CCFA0C76D0E1C2FE /* SurfaceLength3DFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SurfaceLength3DFilter.h"; path = "SurfaceLength3DFilter.h"; sourceTree = "<group>"; };
+		20F5002F60C943509B4BF740 /* AnatomicalLabelSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AnatomicalLabelSet.h"; path = "Classes/AnatomicalLabelSet.h"; sourceTree = "<group>"; };
+		AF8832BA8BE427FFBB053EF0 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Constants.h"; path = "Classes/Constants.h"; sourceTree = "<group>"; };
+		0C75EE39CA8EA97A4D0267A3 /* GeodesicProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "GeodesicProcessor.h"; path = "Classes/GeodesicProcessor.h"; sourceTree = "<group>"; };
+		C9F41748FA471BB258D030D1 /* MeasurementExporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MeasurementExporter.h"; path = "Classes/MeasurementExporter.h"; sourceTree = "<group>"; };
+		36E8FAE4722508633729E3AE /* PointPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PointPair.h"; path = "Classes/PointPair.h"; sourceTree = "<group>"; };
+		3056CD349CCE73C4F1B8DC42 /* ProcessWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ProcessWindowController.h"; path = "Classes/ProcessWindowController.h"; sourceTree = "<group>"; };
+		45CB3BFCBAFA63BD6A1B6388 /* ReportView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ReportView.h"; path = "Classes/ReportView.h"; sourceTree = "<group>"; };
+		FA103BDA7076ABE8F5B02983 /* ReportWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ReportWindowController.h"; path = "Classes/ReportWindowController.h"; sourceTree = "<group>"; };
+		F02699A4D8B99BB8FE1F419D /* ValidationPhantom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ValidationPhantom.h"; path = "Classes/ValidationPhantom.h"; sourceTree = "<group>"; };
+		1039B2E5F294E5FFB8E1FCF2 /* VascularPlanningReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "VascularPlanningReport.h"; path = "Classes/VascularPlanningReport.h"; sourceTree = "<group>"; };
+		8E18A064E084C2836A4BAAD2 /* WizardWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "WizardWindowController.h"; path = "Classes/WizardWindowController.h"; sourceTree = "<group>"; };
+		27359E5A44F2EA4B3F33014E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3C4689F594D0618E79AA02D /* Horos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Horos.framework; path = Horos.framework; sourceTree = "<group>"; };
+		0FFFE67AEAE1C840D4B2940F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		F57E1E8A5103D7AF58ADA93E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7DE45666D42F8083E9B310E9 /* SurfaceLength3D.horosPlugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SurfaceLength3D.horosPlugin; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		80FD2B94D3307C256DF5DCF8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46EB64C16DC78200F3E4E4C3 /* Horos.framework in Frameworks */,
+				F3B4E9F1B5D4A6EAF93AA22E /* AppKit.framework in Frameworks */,
+				8C290BB75B185FE0EFB3891C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		988DB6ADFC334163F6B12389 = {
+			isa = PBXGroup;
+			children = (
+				06EFE74CD92A229CF4118293 /* Classes */,
+				3A304412C7E01C018A3A5545 /* Frameworks */,
+				01C511FA8F3A8172E0F6E214 /* SurfaceLength3DFilter.m */,
+				67067FB4CCFA0C76D0E1C2FE /* SurfaceLength3DFilter.h */,
+				27359E5A44F2EA4B3F33014E /* Info.plist */,
+			);
+			sourceTree = "<group>";
+		};
+		06EFE74CD92A229CF4118293 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				EFD84C24E77A19793A3AEFB8 /* AnatomicalLabelSet.m */,
+				6DC5518568093CB9A03DDBDB /* Constants.m */,
+				B6DBE6A5FE88BA083E1B5D5B /* GeodesicProcessor.mm */,
+				1B13BC265B4E43EF24522CCA /* MeasurementExporter.m */,
+				1AC902918BF8415429F7E703 /* PointPair.m */,
+				73EF6C869D74B71D9F5D59C0 /* ProcessWindowController.m */,
+				CA29380EA5EBEF06BEF8017E /* ReportView.m */,
+				0D3802412FB23946049DDEF0 /* ReportWindowController.m */,
+				A338CF5BD00C14EA8930992F /* ValidationPhantom.mm */,
+				67B9FEB4E77C2D767A0E74B7 /* VascularPlanningReport.m */,
+				BCFB843499C34C667BCFAA4F /* WizardWindowController.m */,
+				20F5002F60C943509B4BF740 /* AnatomicalLabelSet.h */,
+				AF8832BA8BE427FFBB053EF0 /* Constants.h */,
+				0C75EE39CA8EA97A4D0267A3 /* GeodesicProcessor.h */,
+				C9F41748FA471BB258D030D1 /* MeasurementExporter.h */,
+				36E8FAE4722508633729E3AE /* PointPair.h */,
+				3056CD349CCE73C4F1B8DC42 /* ProcessWindowController.h */,
+				45CB3BFCBAFA63BD6A1B6388 /* ReportView.h */,
+				FA103BDA7076ABE8F5B02983 /* ReportWindowController.h */,
+				F02699A4D8B99BB8FE1F419D /* ValidationPhantom.h */,
+				1039B2E5F294E5FFB8E1FCF2 /* VascularPlanningReport.h */,
+				8E18A064E084C2836A4BAAD2 /* WizardWindowController.h */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		3A304412C7E01C018A3A5545 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D3C4689F594D0618E79AA02D /* Horos.framework */,
+				0FFFE67AEAE1C840D4B2940F /* AppKit.framework */,
+				F57E1E8A5103D7AF58ADA93E /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B88D7E26791946AEFDCC8BB7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7DE45666D42F8083E9B310E9 /* SurfaceLength3D.horosPlugin */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		730950AD798A77AD508AA9E2 /* SurfaceLength3D */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 65A46987C25C5B7B2DC3BF36;
+			buildPhases = (
+				7EE609159AC086BAB15FF998 /* Sources */,
+				80FD2B94D3307C256DF5DCF8 /* Frameworks */,
+			);
+			buildRules = ();
+			dependencies = ();
+			name = SurfaceLength3D;
+			productReference = 7DE45666D42F8083E9B310E9;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1781F676DEDF5767F3243DB0 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 622013D7995FCF45560EF4B7;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (en, Base);
+			mainGroup = 988DB6ADFC334163F6B12389;
+			productRefGroup = B88D7E26791946AEFDCC8BB7;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				730950AD798A77AD508AA9E2 /* SurfaceLength3D */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7EE609159AC086BAB15FF998 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D05BD23DE599A0736FBECE5 /* SurfaceLength3DFilter.m in Sources */,
+				84C1A988C0554FE853299F89 /* AnatomicalLabelSet.m in Sources */,
+				E50D1650FE5BA905E05D8AE2 /* Constants.m in Sources */,
+				284E42F0EA3E096A8E614C2F /* GeodesicProcessor.mm in Sources */,
+				54EB2EBCBEA12B90E65D1683 /* MeasurementExporter.m in Sources */,
+				D200F86E54EF52FDBB1A00FE /* PointPair.m in Sources */,
+				23C82C7A670FA25C80A6F925 /* ProcessWindowController.m in Sources */,
+				3067FFDEB930A5F3F860E8B3 /* ReportView.m in Sources */,
+				82118C48E126C5734A7ADF70 /* ReportWindowController.m in Sources */,
+				973C0D4938AB5AB756CF3C48 /* ValidationPhantom.mm in Sources */,
+				AC4C4972A5A3E5C82ABE5B09 /* VascularPlanningReport.m in Sources */,
+				26A7281448311570629EA47F /* WizardWindowController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		305C54C7C66730AEE6068211 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("DEBUG=1", "$(inherited)");
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		58C14B087893ABAC9A9FAB72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_OPTIMIZATION_LEVEL = s;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A819901131B15D963AD796AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Application Support/Horos/Plugins";
+				OTHER_LDFLAGS = "-undefined dynamic_lookup";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.trixsoftware.horos.surfacelength3d";
+				PRODUCT_NAME = SurfaceLength3D;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = horosPlugin;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Horos.framework/Versions/A/Headers";
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				SDKROOT = macosx;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("DEBUG=1", "$(inherited)");
+			};
+			name = Debug;
+		};
+		78A771A34D796A8423BEE695 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Application Support/Horos/Plugins";
+				OTHER_LDFLAGS = "-undefined dynamic_lookup";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.trixsoftware.horos.surfacelength3d";
+				PRODUCT_NAME = SurfaceLength3D;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = horosPlugin;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Horos.framework/Versions/A/Headers";
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				SDKROOT = macosx;
+				GCC_OPTIMIZATION_LEVEL = s;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		622013D7995FCF45560EF4B7 /* Build configuration list for PBXProject "SurfaceLength3D" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				305C54C7C66730AEE6068211 /* Debug */,
+				58C14B087893ABAC9A9FAB72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		65A46987C25C5B7B2DC3BF36 /* Build configuration list for PBXNativeTarget "SurfaceLength3D" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A819901131B15D963AD796AB /* Debug */,
+				78A771A34D796A8423BEE695 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = 1781F676DEDF5767F3243DB0 /* Project object */;
+}

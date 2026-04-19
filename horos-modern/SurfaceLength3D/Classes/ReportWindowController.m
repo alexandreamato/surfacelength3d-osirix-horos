@@ -11,9 +11,9 @@
 #import "ReportWindowController.h"
 #import "ReportView.h"
 #import "SurfaceLength3DFilter.h"
-#import <OsiriXAPI/ViewerController.h>
-#import <OsiriXAPI/ROI.h>
-#import <OsiriXAPI/DCMPix.h>
+#import <Horos/ViewerController.h>
+#import <Horos/ROI.h>
+#import <Horos/DCMPix.h>
 #import "PointPair.h"
 #import "MeasurementExporter.h"
 #import "VascularPlanningReport.h"

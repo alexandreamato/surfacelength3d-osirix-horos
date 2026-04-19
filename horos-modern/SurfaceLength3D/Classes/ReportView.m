@@ -5,8 +5,8 @@
 #import "ReportWindowController.h"
 #import "PointPair.h"
 #import "SurfaceLength3DFilter.h"
-#import <OsiriXAPI/ROI.h>
-#import <OsiriXAPI/DCMPix.h>
+#import <Horos/ROI.h>
+#import <Horos/DCMPix.h>
 
 static const CGFloat kMarkerDiameter = 10.0;
 static const CGFloat kLineWidth      = 2.0;

@@ -8,7 +8,7 @@
 
 #import "WizardWindowController.h"
 #import "SurfaceLength3DFilter.h"
-#import <OsiriXAPI/ViewerController.h>
+#import <Horos/ViewerController.h>
 #import "Constants.h"
 
 static const NSInteger kTotalSteps = 3;
