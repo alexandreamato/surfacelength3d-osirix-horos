@@ -13,11 +13,11 @@
 
 #import "ProcessWindowController.h"
 #import "SurfaceLength3DFilter.h"
-#import "ViewerController.h"
+#import <OsiriXAPI/ViewerController.h>
 #import "GeodesicProcessor.h"
 #import "PointPair.h"
-#import "ROI.h"
-#import "DCMPix.h"
+#import <OsiriXAPI/ROI.h>
+#import <OsiriXAPI/DCMPix.h>
 #import "Constants.h"
 
 @interface ProcessWindowController ()

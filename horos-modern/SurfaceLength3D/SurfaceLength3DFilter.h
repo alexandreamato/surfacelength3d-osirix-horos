@@ -1,7 +1,7 @@
 // SurfaceLength3DFilter.h — Horos plugin entry point
 
 #import <Foundation/Foundation.h>
-#import "PluginFilter.h"
+#import <OsiriXAPI/PluginFilter.h>
 
 @class WizardWindowController, ProcessWindowController, ReportWindowController;
 

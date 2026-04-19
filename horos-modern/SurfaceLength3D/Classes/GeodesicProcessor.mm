@@ -29,10 +29,10 @@
 #undef id
 #endif
 
-#import "ViewerController.h"
-#import "SRController.h"
-#import "DCMPix.h"
-#import "ROI.h"
+#import <OsiriXAPI/ViewerController.h>
+#import <OsiriXAPI/SRController.h>
+#import <OsiriXAPI/DCMPix.h>
+#import <OsiriXAPI/ROI.h>
 #import "ProcessWindowController.h"
 #import "SurfaceLength3DFilter.h"
 #import "PointPair.h"

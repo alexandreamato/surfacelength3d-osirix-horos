@@ -9,8 +9,8 @@
 #import "ReportWindowController.h"
 #import "ReportView.h"
 #import "SurfaceLength3DFilter.h"
-#import "ViewerController.h"
-#import "ROI.h"
+#import <OsiriXAPI/ViewerController.h>
+#import <OsiriXAPI/ROI.h>
 #import "PointPair.h"
 
 @interface ReportWindowController ()
