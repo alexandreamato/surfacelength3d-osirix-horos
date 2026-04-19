@@ -46,6 +46,7 @@ static const NSInteger kMaxPaths = 200;
 @property (nonatomic, weak) ViewerController       *viewerController;
 @property (nonatomic, weak) ProcessWindowController *windowController;
 @property (nonatomic, weak) SurfaceLength3DFilter   *pluginFilter;
+@property (nonatomic, assign) NSInteger              preferredSurfaceIndex; // -1 = auto
 
 @end
 
@@ -78,6 +79,33 @@ static const NSInteger kMaxPaths = 200;
 #pragma mark - Surface actor detection
 // ---------------------------------------------------------------------------
 
+- (NSArray<NSDictionary *> *)availableSurfaceDescriptions {
+    SRController *srViewer = [self.viewerController openSRViewer];
+    if (!srViewer) return @[];
+
+    vtkRenderer *rend = (vtkRenderer *)[[srViewer view] vtkRenderer];
+    if (!rend) return @[];
+
+    vtkActorCollection *actors = rend->GetActors();
+    if (!actors) return @[];
+
+    NSMutableArray *result = [NSMutableArray array];
+    vtkActor *actor = nullptr;
+    for (actors->InitTraversal(); (actor = actors->GetNextActor()); ) {
+        vtkMapper *mapper = actor->GetMapper();
+        if (!mapper || !mapper->GetInput()) continue;
+        NSInteger pts = (NSInteger)mapper->GetInput()->GetNumberOfPoints();
+        if (pts < 1000) continue;
+        [result addObject:@{
+            @"index":    @(result.count),
+            @"vertices": @(pts),
+            @"label":    [NSString stringWithFormat:@"Superfície %ld (%ld vértices)",
+                          (long)(result.count + 1), (long)pts]
+        }];
+    }
+    return result;
+}
+
 - (nullable vtkActor *)surfaceActor {
     SRController *srViewer = [self.viewerController openSRViewer];
     if (!srViewer) return nullptr;
@@ -88,14 +116,25 @@ static const NSInteger kMaxPaths = 200;
     vtkActorCollection *actors = rend->GetActors();
     if (!actors) return nullptr;
 
+    vtkActor *bestActor   = nullptr;
+    vtkIdType bestPoints  = 0;
+    vtkActor *chosenActor = nullptr;
+    NSInteger qualifying  = 0;
+
     vtkActor *actor = nullptr;
     for (actors->InitTraversal(); (actor = actors->GetNextActor()); ) {
         vtkMapper *mapper = actor->GetMapper();
-        if (mapper && mapper->GetInput() && mapper->GetInput()->GetNumberOfPoints() > 1000) {
-            return actor;
-        }
+        if (!mapper || !mapper->GetInput()) continue;
+        vtkIdType pts = mapper->GetInput()->GetNumberOfPoints();
+        if (pts < 1000) continue;
+
+        if (pts > bestPoints) { bestPoints = pts; bestActor = actor; }
+        if (qualifying == self.preferredSurfaceIndex) chosenActor = actor;
+        qualifying++;
     }
-    return nullptr;
+
+    if (self.preferredSurfaceIndex >= 0 && chosenActor) return chosenActor;
+    return bestActor;
 }
 
 // ---------------------------------------------------------------------------

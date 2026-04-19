@@ -4,6 +4,8 @@
 //   Window with:
 //   - ReportView (reportView) filling most of the window
 //   - NSSegmentedControl (centrePointControl) for choosing the centre point
+//   - NSButton "Export PDF" (exportPDFButton)
+//   - NSButton "Vascular Plan" (vascularPlanButton)
 //   - NSButton "Close"
 
 #import "ReportWindowController.h"
@@ -11,7 +13,10 @@
 #import "SurfaceLength3DFilter.h"
 #import <OsiriXAPI/ViewerController.h>
 #import <OsiriXAPI/ROI.h>
+#import <OsiriXAPI/DCMPix.h>
 #import "PointPair.h"
+#import "MeasurementExporter.h"
+#import "VascularPlanningReport.h"
 
 @interface ReportWindowController ()
 
@@ -22,6 +27,8 @@
 
 @property (nonatomic, weak) IBOutlet ReportView           *reportView;
 @property (nonatomic, weak) IBOutlet NSSegmentedControl   *centrePointControl;
+@property (nonatomic, weak) IBOutlet NSButton             *exportPDFButton;
+@property (nonatomic, weak) IBOutlet NSButton             *vascularPlanButton;
 
 @end
 
@@ -79,6 +86,49 @@
 
 - (IBAction)changeCentrePoint:(id)sender {
     [self.reportView setNeedsDisplay:YES];
+}
+
+- (IBAction)doExportPDF:(id)sender {
+    NSString *patientName = @"";
+    DCMPix *pix = __viewerController.pixList.firstObject;
+    if (pix) patientName = pix.patientName ?: @"";
+
+    [MeasurementExporter exportToPDF:__filter.pairsResultsArray
+                          reportView:self.reportView
+                           patientID:patientName
+                    presentingWindow:self.window
+                          completion:nil];
+}
+
+- (IBAction)doVascularPlan:(id)sender {
+    VascularPlanningResult *plan =
+        [VascularPlanningReport analyzeWithPairs:__filter.pairsResultsArray];
+
+    NSString *recStr;
+    switch (plan.recommendation) {
+        case GraftRecommendationPatch:
+            recStr = NSLocalizedString(@"Patch (≤25mm)", nil); break;
+        case GraftRecommendationCoselliGraft:
+            recStr = NSLocalizedString(@"Enxerto de Coselli (25–55mm)", nil); break;
+        case GraftRecommendationIndividual:
+            recStr = NSLocalizedString(@"Reimplante individual (>55mm)", nil); break;
+        default:
+            recStr = NSLocalizedString(@"Inconclusivo — sem vasos identificados", nil); break;
+    }
+
+    NSString *vessels = plan.detectedVessels.count
+        ? [plan.detectedVessels componentsJoinedByString:@", "]
+        : NSLocalizedString(@"nenhum", nil);
+
+    NSString *msg = [NSString stringWithFormat:
+        @"Recomendação: %@\n\nRacional: %@\n\nVasos detectados: %@\n\n%@",
+        recStr, plan.rationale, vessels, plan.disclaimer];
+
+    NSAlert *alert = [[NSAlert alloc] init];
+    alert.messageText     = NSLocalizedString(@"Planejamento Vascular (Coselli)", nil);
+    alert.informativeText = msg;
+    [alert addButtonWithTitle:@"OK"];
+    [alert runModal];
 }
 
 // ---------------------------------------------------------------------------

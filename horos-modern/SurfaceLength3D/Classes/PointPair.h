@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL           displayPath;
 @property (nonatomic, assign) double         distanceDirect;   // Euclidean (mm)
 @property (nonatomic, assign) double         distanceSurface;  // Geodesic (mm)
+/// surface / direct — quantifies surface curvature; 1.0 = flat, higher = more curved
+@property (nonatomic, readonly) double       distanceRatio;
 @property (nonatomic, assign) BOOL           clockwise;
 @property (nonatomic, assign) NSInteger      p1ROIIndex;
 @property (nonatomic, assign) NSInteger      p2ROIIndex;

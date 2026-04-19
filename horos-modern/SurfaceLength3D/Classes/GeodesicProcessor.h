@@ -21,7 +21,14 @@ NS_ASSUME_NONNULL_BEGIN
                         windowController:(ProcessWindowController *)wc
                             pluginFilter:(SurfaceLength3DFilter *)filter NS_DESIGNATED_INITIALIZER;
 
-// Runs Dijkstra on a background thread; calls completion on the main thread when done.
+/// Returns info dicts for all VTK actors with enough vertices to be surfaces.
+/// Keys: @"index" (NSInteger), @"vertices" (NSInteger), @"label" (NSString).
+- (NSArray<NSDictionary *> *)availableSurfaceDescriptions;
+
+/// Select which surface actor to use for geodesic computation. Default = -1 (auto: largest).
+- (void)setPreferredSurfaceIndex:(NSInteger)index;
+
+/// Runs Dijkstra on a background thread; calls completion on the main thread when done.
 - (void)processAllPathsWithCompletion:(nullable void (^)(void))completion;
 
 - (void)removeAllPaths;

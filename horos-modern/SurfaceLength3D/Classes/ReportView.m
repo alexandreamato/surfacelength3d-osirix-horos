@@ -124,14 +124,15 @@ static const CGFloat kLineWidth      = 2.0;
         CGFloat yOff = (ptY < centre.y) ? -22.0 : 8.0;
         [ptROI.name drawAtPoint:NSMakePoint(ptX - 10, ptY + yOff) withAttributes:labelAttrs];
 
-        // Distance label at midpoint of line
+        // Distance label at midpoint of line — shows surface mm and geodesic/Euclidean ratio
         NSPoint mid = NSMakePoint((ptX + centre.x) / 2, (ptY + centre.y) / 2);
         CGFloat xOff = (fabs(ptX - centre.x) > fabs(ptY - centre.y)) ? 0 : 8;
         yOff         = (fabs(ptX - centre.x) > fabs(ptY - centre.y)) ? -14 : 0;
         NSMutableDictionary *da = [distAttrs mutableCopy];
         da[NSForegroundColorAttributeName] = pp.pathColor;
-        [[NSString stringWithFormat:@"%.1f", pp.distanceSurface]
-            drawAtPoint:NSMakePoint(mid.x + xOff, mid.y + yOff) withAttributes:da];
+        NSString *distLabel = [NSString stringWithFormat:@"%.1f mm (×%.2f)",
+                               pp.distanceSurface, pp.distanceRatio];
+        [distLabel drawAtPoint:NSMakePoint(mid.x + xOff, mid.y + yOff) withAttributes:da];
     }
 
     // Centre marker (red circle)
@@ -172,7 +173,7 @@ static const CGFloat kLineWidth      = 2.0;
         CGFloat yOff = (fabs(pt1.x - pt2.x) > fabs(pt1.y - pt2.y)) ? -14 : 0;
         NSMutableDictionary *da = [distAttrs mutableCopy];
         da[NSForegroundColorAttributeName] = pp.pathColor;
-        [[NSString stringWithFormat:@"%.1f", pp.distanceSurface]
+        [[NSString stringWithFormat:@"%.1f mm (×%.2f)", pp.distanceSurface, pp.distanceRatio]
             drawAtPoint:NSMakePoint(mid.x + xOff, mid.y + yOff) withAttributes:da];
     }
 }
