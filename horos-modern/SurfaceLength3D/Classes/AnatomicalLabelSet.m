@@ -23,18 +23,18 @@
     switch (context) {
         case AnatomicalContextVascular:
             s.name   = NSLocalizedString(@"Vascular (Aorta)", nil);
-            s.labels = @[@"Celíaco", @"Mesentérica Sup.", @"Renal D", @"Renal E", @"Aorta"];
+            s.labels = @[@"Celiac", @"Sup. Mesenteric", @"Renal R", @"Renal L", @"Aorta"];
             break;
         case AnatomicalContextNeurology:
-            s.name   = NSLocalizedString(@"Neurocirurgia (Crânio)", nil);
-            s.labels = @[@"Naso", @"Ínio", @"Bregma", @"Lambda", @"Tragus D", @"Tragus E", @"Pterion D", @"Pterion E"];
+            s.name   = NSLocalizedString(@"Neurosurgery (Skull)", nil);
+            s.labels = @[@"Nasion", @"Inion", @"Bregma", @"Lambda", @"Tragus R", @"Tragus L", @"Pterion R", @"Pterion L"];
             break;
         case AnatomicalContextPlastic:
-            s.name   = NSLocalizedString(@"Plástica (Landmarks)", nil);
-            s.labels = @[@"Glabela", @"Ponta Nasal", @"Subnasal", @"Mento", @"Canto D", @"Canto E", @"Tragus D", @"Tragus E"];
+            s.name   = NSLocalizedString(@"Plastic Surgery (Landmarks)", nil);
+            s.labels = @[@"Glabella", @"Nasal Tip", @"Subnasale", @"Menton", @"Canthus R", @"Canthus L", @"Tragus R", @"Tragus L"];
             break;
         case AnatomicalContextGeneric:
-            s.name   = NSLocalizedString(@"Genérico", nil);
+            s.name   = NSLocalizedString(@"Generic", nil);
             s.labels = @[@"P1",@"P2",@"P3",@"P4",@"P5",@"P6",@"P7",@"P8",@"P9",@"P10"];
             break;
     }

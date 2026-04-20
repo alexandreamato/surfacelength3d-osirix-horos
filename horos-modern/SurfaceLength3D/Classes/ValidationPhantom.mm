@@ -64,11 +64,15 @@
 }
 
 - (NSString *)summary {
-    NSString *shapeName = (self.shape == PhantomShapeSphere) ? @"Esfera" : @"Cilindro";
+    NSString *shapeName = (self.shape == PhantomShapeSphere) ? @"Sphere" : @"Cylinder";
+    if (!self.testCases.count)
+        return [NSString stringWithFormat:
+            @"%@ R=%.0fmm, res=%ld: phantom validation unavailable in Horos runtime (VTK ABI mismatch).",
+            shapeName, self.radius, (long)self.meshResolution];
     return [NSString stringWithFormat:
-        @"%@ R=%.0fmm, resolução=%ld: erro médio=%.2f%%, erro máx=%.2f%%\n"
-        @"Baseado em %lu casos de teste com distância analítica conhecida.\n"
-        @"Erro < 1%% = excelente, < 2%% = aceitável para planejamento cirúrgico.",
+        @"%@ R=%.0fmm, res=%ld: mean error=%.2f%%, max error=%.2f%%\n"
+        @"Based on %lu test cases with analytically known distances.\n"
+        @"Error < 1%% = excellent, < 2%% = acceptable for surgical planning.",
         shapeName, self.radius, (long)self.meshResolution,
         self.meanPercentError, self.maxPercentError,
         (unsigned long)self.testCases.count];
@@ -101,7 +105,17 @@
                                     radius:(double)R
                                 resolution:(NSInteger)res {
 
-    // Build mesh
+    // VTK source/filter objects (vtkSphereSource, vtkCylinderSource, vtkTriangleFilter)
+    // use virtual methods whose vtable layout differs between Horos's embedded VTK 8 and
+    // the VTK 9.5 headers we compile against. Calling them crashes. Return a stub result.
+    ValidationPhantomResult *stub = [[ValidationPhantomResult alloc] init];
+    stub.shape          = shape;
+    stub.radius         = R;
+    stub.meshResolution = res;
+    stub.testCases      = @[];
+    return stub;
+
+    // --- unreachable below; kept for future standalone (non-Horos) build ---
     vtkPolyData *mesh = nullptr;
     vtkSphereSource    *sphere   = nullptr;
     vtkCylinderSource  *cylinder = nullptr;
@@ -172,7 +186,7 @@
             double measured = [self dijkstraDistance:mesh from:id1 to:id2];
 
             PhantomTestCase *tc = [[PhantomTestCase alloc] init];
-            tc.label = [NSString stringWithFormat:@"Caso %lu (φ=%.0f°→%.0f°)",
+            tc.label = [NSString stringWithFormat:@"Case %lu (φ=%.0f°→%.0f°)",
                         (unsigned long)(i+1), phi1*180/M_PI, phi2*180/M_PI];
             tc.analyticalDistance = analytical;
             tc.measuredDistance   = measured;
@@ -213,7 +227,7 @@
             double measured = [self dijkstraDistance:mesh from:id1 to:id2];
 
             PhantomTestCase *tc = [[PhantomTestCase alloc] init];
-            tc.label = [NSString stringWithFormat:@"Caso %lu (Δz=%.0f, Δθ=%.0f°)",
+            tc.label = [NSString stringWithFormat:@"Case %lu (Δz=%.0f, Δθ=%.0f°)",
                         (unsigned long)(i+1), dz, dTheta*180/M_PI];
             tc.analyticalDistance = analytical;
             tc.measuredDistance   = measured;

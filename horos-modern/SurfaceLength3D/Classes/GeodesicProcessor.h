@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GeodesicProcessor : NSObject
 
+@property (nonatomic, assign) double pathLineWidth;
+
 - (instancetype)initWithViewerController:(ViewerController *)vc
                         windowController:(ProcessWindowController *)wc
                             pluginFilter:(SurfaceLength3DFilter *)filter NS_DESIGNATED_INITIALIZER;
@@ -34,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeAllPaths;
 - (void)removePathAtIndex:(NSInteger)index;
 - (void)displayPathAtIndex:(NSInteger)index;
+- (void)applyCurrentLineWidthToVisiblePaths;
 
 @end
 

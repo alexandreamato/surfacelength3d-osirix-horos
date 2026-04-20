@@ -5,8 +5,7 @@
 static BOOL isKnownVesselName(NSString *name) {
     NSString *n = [name lowercaseString];
     NSArray *patterns = @[
-        @"cel", @"sma", @"mesentér", @"mesenter",
-        @"renal", @"rim"
+        @"cel", @"sma", @"mesenter", @"renal"
     ];
     for (NSString *p in patterns) {
         if ([n containsString:p]) return YES;
@@ -31,7 +30,7 @@ static BOOL isKnownVesselName(NSString *name) {
         _maxInterVesselDistance  = maxDist;
         _boundingBoxDiameter     = diameter;
         _detectedVessels         = [vessels copy];
-        _disclaimer              = @"⚠ Ferramenta de apoio à decisão. Não substitui o julgamento clínico do cirurgião. Validação com dados phantom ainda necessária (ver artigo DOI: 10.1590/1677-5449.005316).";
+        _disclaimer              = @"⚠ Decision support tool only. Does not replace the surgeon's clinical judgment. Phantom validation still required (see DOI: 10.1590/1677-5449.005316).";
     }
     return self;
 }
@@ -59,8 +58,8 @@ static BOOL isKnownVesselName(NSString *name) {
     if (vesselPairs.count == 0) {
         return [[VascularPlanningResult alloc]
             initWithRecommendation:GraftRecommendationInconclusive
-                             label:@"Inconclusivo"
-                         rationale:@"Nenhum par de vasos viscerais reconhecido. Use labels anatômicos: Celíaco, Mesentérica Sup., Renal D, Renal E."
+                             label:@"Inconclusive"
+                         rationale:@"No visceral vessel pairs recognized. Use anatomical labels: Celiac, Sup. Mesenteric, Right Renal, Left Renal."
                        maxDistance:0 boundingDiameter:0
                     detectedVessels:@[]];
     }
@@ -84,24 +83,24 @@ static BOOL isKnownVesselName(NSString *name) {
 
     if (diameter <= 25.0) {
         rec = GraftRecommendationPatch;
-        label = @"Patch único (Island technique)";
+        label = @"Single patch (island technique)";
         rationale = [NSString stringWithFormat:
-            @"Distância máxima entre óstios: %.1f mm (≤ 25 mm). "
-            @"Os vasos viscerais estão agrupados — um patch elíptico único pode acomodar todos os óstios em uma reimplantação.",
+            @"Maximum inter-ostial distance: %.1f mm (≤ 25 mm). "
+            @"Visceral vessels are clustered — a single elliptical patch can accommodate all ostia in one reimplantation.",
             maxDist];
     } else if (diameter <= 55.0) {
         rec = GraftRecommendationCoselliGraft;
-        label = @"Enxerto de Coselli (4 ramos)";
+        label = @"Coselli graft (4-branch)";
         rationale = [NSString stringWithFormat:
-            @"Distância máxima entre óstios: %.1f mm (25–55 mm). "
-            @"Dispersão moderada — enxerto de Coselli com 4 ramos branched é a estratégia padrão para esta configuração.",
+            @"Maximum inter-ostial distance: %.1f mm (25–55 mm). "
+            @"Moderate spread — a 4-branch Coselli branched graft is the standard strategy for this configuration.",
             maxDist];
     } else {
         rec = GraftRecommendationIndividual;
-        label = @"Reimplantação individual / bypasses";
+        label = @"Individual reimplantation / bypasses";
         rationale = [NSString stringWithFormat:
-            @"Distância máxima entre óstios: %.1f mm (> 55 mm). "
-            @"Dispersão ampla — reimplantação individual de cada vaso ou bypasses separados devem ser considerados.",
+            @"Maximum inter-ostial distance: %.1f mm (> 55 mm). "
+            @"Wide spread — individual reimplantation of each vessel or separate bypasses should be considered.",
             maxDist];
     }
 

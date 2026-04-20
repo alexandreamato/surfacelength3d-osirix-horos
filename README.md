@@ -2,7 +2,13 @@
 
 A medical imaging plugin that computes **geodesic (surface) distances** between user-defined anatomical points on 3D surface renders of DICOM data, using Dijkstra's shortest-path algorithm on the VTK surface mesh.
 
-Originally developed for OsiriX (2008, TriX Software / Gary Fielke). The modern version targets Horos and OsiriX with an updated VTK 9.x API and contemporary Objective-C patterns.
+Originally developed for OsiriX (2008, TriX Software / Gary Fielke). The modern version targets Horos and OsiriX MD with ARC, GCD background processing, and a custom Dijkstra implementation that handles the VTK ABI difference between compile-time headers (VTK 9.x) and the VTK 8.x runtime bundled inside Horos.
+
+---
+
+## Plugin Page
+
+[https://software.amato.com.br/surface-length-3d-osirix-plugin/](https://software.amato.com.br/surface-length-3d-osirix-plugin/)
 
 ---
 
@@ -42,7 +48,7 @@ Preliminary validation of OsiriX standard distance tools showed **0.3 mm precisi
 
 1. **Segment** — isolate the structure of interest in OsiriX/Horos (e.g., the aorta) using the VOI Cutter or segmentation tools
 2. **Place Points** — place 2D point ROIs on each anatomical landmark in the MPR viewer (e.g., each visceral ostium)
-3. **Process** — the plugin opens the 3D surface renderer, detects the VTK mesh, and runs `vtkDijkstraGraphGeodesicPath` for every pair of points; each path is shown as a colored tube on the 3D render
+3. **Process** — the plugin opens the 3D surface renderer, detects the VTK mesh, and runs a custom Dijkstra shortest-path algorithm on each pair of points; each path is shown as a colored tube on the 3D render
 4. **Report** — a radial 2D plot shows all surface distances from the auto-selected centre point; a table compares Euclidean vs. geodesic distances
 
 ---
@@ -52,7 +58,7 @@ Preliminary validation of OsiriX standard distance tools showed **0.3 mm precisi
 | Folder | Target | VTK | Memory | Status |
 |---|---|---|---|---|
 | `legacy-osirix/` | OsiriX 3.x (32-bit, macOS ≤ 10.14) | VTK 5.x | Manual retain/release | Historical — see [Releases](../../releases) |
-| `horos-modern/` | **Horos 3.x + OsiriX MD** (64-bit, macOS 10.15+) | VTK 9.x | ARC | Active development |
+| `horos-modern/` | **Horos 3.x + OsiriX MD** (64-bit, macOS 12+) | VTK 8 runtime (Horos) / VTK 9 headers | ARC | Active development |
 
 ### Does the modern version run on OsiriX?
 
@@ -64,11 +70,21 @@ Preliminary validation of OsiriX standard distance tools showed **0.3 mm precisi
 ## Building (modern version)
 
 ### Requirements
-- macOS 12+ / Xcode 14+
-- `OsiriXAPI.framework` — extracted from `Horos.app/Contents/Frameworks/` or `OsiriX MD.app/Contents/Frameworks/` (includes VTK; no separate VTK installation needed)
+- macOS 12+ / Xcode 14+ (or command-line tools)
+- `Horos.framework` — extracted from `Horos.app/Contents/Frameworks/` (includes VTK 8 runtime; no separate VTK installation needed)
+- VTK 9.x headers — `brew install vtk` (compile-time only; not linked at runtime)
+
+### Build script (recommended)
+
+```bash
+cd horos-modern/SurfaceLength3D
+bash build.sh
+```
+
+Compiles all sources with `clang` directly, links against `Horos.framework` with `-undefined dynamic_lookup`, packages the `.horosplugin` bundle, and installs it into `~/Library/Application Support/Horos/Plugins/`.
 
 ### Xcode project
-See [`horos-modern/SurfaceLength3D/XcodeProjectSetup.md`](horos-modern/SurfaceLength3D/XcodeProjectSetup.md) for step-by-step instructions, required build settings (`-undefined dynamic_lookup`), XIB wiring, and debug alias setup.
+An Xcode project is also included at `horos-modern/SurfaceLength3D/SurfaceLength3D.xcodeproj` for IDE-assisted development. See [`horos-modern/SurfaceLength3D/XcodeProjectSetup.md`](horos-modern/SurfaceLength3D/XcodeProjectSetup.md) for build settings and debug alias setup.
 
 ---
 
@@ -76,12 +92,15 @@ See [`horos-modern/SurfaceLength3D/XcodeProjectSetup.md`](horos-modern/SurfaceLe
 
 | Aspect | Legacy (OsiriX) | Modern (Horos) |
 |---|---|---|
-| SDK | Copied header files | **`OsiriXAPI.framework`** |
-| Linker flag | variava | **`-undefined dynamic_lookup`** |
-| VTK | 27 static `.a` libs (~221 MB) | **Bundled in framework** |
+| SDK | Copied header files | **`Horos.framework`** |
+| Linker flag | n/a | **`-undefined dynamic_lookup`** |
+| VTK | 27 static `.a` libs (~221 MB) | **Bundled in Horos.framework (VTK 8 runtime)** |
+| Dijkstra | `vtkDijkstraGraphGeodesicPath` | **Custom CSR-based Dijkstra** (absent from Horos binary) |
+| VTK dispatch | Virtual method calls (VTK 5 API) | **Direct struct-offset reads** (avoids VTK 8/9 ABI vtable mismatch) |
+| Mesh access | VTK objects on main thread | **Deep-copy to NSData before GCD dispatch** (thread-safe) |
 | Memory | `retain` / `release` | **ARC** |
-| VTK API | `SetInput()` (VTK 5) | **`SetInputData()` / `SetInputConnection()`** |
 | Processing | Main thread (blocks UI) | **GCD background queue** |
+| UI | XIB files | **Programmatic (no XIBs)** |
 | Progress | None | **NSProgressIndicator** |
 | Wizard | 4 steps (VOI Cutter via AppleScript) | **3 steps** |
 
@@ -89,8 +108,8 @@ See [`horos-modern/SurfaceLength3D/XcodeProjectSetup.md`](horos-modern/SurfaceLe
 
 ## Authors
 
-- **Gary Fielke** — original implementation (TriX Software, 2008)
-- **Alexandre Campos Moraes Amato** — clinical conception, modifications, and Horos modernisation
+- **Alexandre Campos Moraes Amato** — conceived the plugin, clinical design, original research, and Horos modernisation
+- **Gary Fielke** — original software implementation (TriX Software, 2008, commissioned by A.C.M. Amato)
 
 ---
 

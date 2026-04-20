@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) double    maxDistance;
 
 - (nullable NSString *)nameOfSelectedCentrePoint;
+- (NSString *)displayNameForROIIndex:(NSInteger)roiIndex;
 - (ViewerController *)viewerController;
 - (SurfaceLength3DFilter *)filter;
 

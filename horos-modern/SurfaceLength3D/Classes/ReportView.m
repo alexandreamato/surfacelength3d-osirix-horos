@@ -44,9 +44,9 @@ static const CGFloat kLineWidth      = 2.0;
             if ([pp.p1Name isEqualToString:centreName]) { centrePtIndex = pp.p1ROIIndex; break; }
             if ([pp.p2Name isEqualToString:centreName]) { centrePtIndex = pp.p2ROIIndex; break; }
         }
-        centreName = ((ROI *)roiList[(NSUInteger)centrePtIndex]).name;
+        centreName = [wc displayNameForROIIndex:centrePtIndex];
     } else {
-        centreName = ((ROI *)roiList[(NSUInteger)centrePtIndex]).name;
+        centreName = [wc displayNameForROIIndex:centrePtIndex];
     }
 
     // Get DICOM location for centre point
@@ -122,7 +122,8 @@ static const CGFloat kLineWidth      = 2.0;
 
         // Point label
         CGFloat yOff = (ptY < centre.y) ? -22.0 : 8.0;
-        [ptROI.name drawAtPoint:NSMakePoint(ptX - 10, ptY + yOff) withAttributes:labelAttrs];
+        [[wc displayNameForROIIndex:ptIndex] drawAtPoint:NSMakePoint(ptX - 10, ptY + yOff)
+                                         withAttributes:labelAttrs];
 
         // Distance label at midpoint of line — shows surface mm and geodesic/Euclidean ratio
         NSPoint mid = NSMakePoint((ptX + centre.x) / 2, (ptY + centre.y) / 2);

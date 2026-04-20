@@ -25,7 +25,7 @@
 		<string>Surface Length 3D</string>
 	</array>
 	<key>pluginType</key>
-	<string>other</string>
+	<string>filter</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2008–2026 TriX Software. All rights reserved.</string>
 </dict>

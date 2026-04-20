@@ -101,11 +101,11 @@
 
     CGPDFContextBeginPage(ctx, NULL);
 
-    // Flip coordinate system (PDF origin = bottom-left; AppKit = top-left)
+    // Flip once so drawing code can use top-left style coordinates.
     CGContextTranslateCTM(ctx, 0, pageRect.size.height);
     CGContextScaleCTM(ctx, 1, -1);
 
-    NSGraphicsContext *nsCtx = [NSGraphicsContext graphicsContextWithCGContext:ctx flipped:NO];
+    NSGraphicsContext *nsCtx = [NSGraphicsContext graphicsContextWithCGContext:ctx flipped:YES];
     [NSGraphicsContext saveGraphicsState];
     [NSGraphicsContext setCurrentContext:nsCtx];
 
@@ -117,7 +117,7 @@
         NSFontAttributeName: [NSFont boldSystemFontOfSize:16],
         NSForegroundColorAttributeName: [NSColor blackColor]
     };
-    [@"Surface Length 3D — Relatório de Medições" drawAtPoint:NSMakePoint(margin, margin) withAttributes:titleAttrs];
+    [@"Surface Length 3D — Measurement Report" drawAtPoint:NSMakePoint(margin, margin) withAttributes:titleAttrs];
     y = margin + 24;
 
     // --- Meta ---
@@ -128,18 +128,18 @@
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     df.dateStyle = NSDateFormatterMediumStyle;
     df.timeStyle = NSDateFormatterShortStyle;
-    NSString *metaLine = [NSString stringWithFormat:@"Data: %@%@",
+    NSString *metaLine = [NSString stringWithFormat:@"Date: %@%@",
         [df stringFromDate:[NSDate date]],
-        patientID.length ? [NSString stringWithFormat:@"   Paciente: %@", patientID] : @""];
+        patientID.length ? [NSString stringWithFormat:@"   Patient: %@", patientID] : @""];
     [metaLine drawAtPoint:NSMakePoint(margin, y) withAttributes:metaAttrs];
     y += 18;
 
     // Disclaimer
     NSDictionary *warnAttrs = @{
-        NSFontAttributeName: [NSFont italicSystemFontOfSize:8],
+        NSFontAttributeName: [NSFont systemFontOfSize:8],
         NSForegroundColorAttributeName: [NSColor redColor]
     };
-    [@"⚠ Para uso em pesquisa. Algoritmo requer validação antes de uso clínico." drawAtPoint:NSMakePoint(margin, y) withAttributes:warnAttrs];
+    [@"⚠ For research use only. Algorithm requires phantom validation before clinical use." drawAtPoint:NSMakePoint(margin, y) withAttributes:warnAttrs];
     y += 20;
 
     // --- Report view snapshot ---
@@ -162,7 +162,7 @@
     NSRectFill(hdrRect);
 
     CGFloat cols[] = { 0, 120, 240, 330, 420, 510 };
-    NSArray *headers = @[@"Ponto 1", @"Ponto 2", @"Direto (mm)", @"Superfície (mm)", @"Ratio", @"Dir."];
+    NSArray *headers = @[@"Point 1", @"Point 2", @"Direct (mm)", @"Surface (mm)", @"Ratio", @"Dir."];
     for (NSUInteger i = 0; i < headers.count && i < 6; i++) {
         [headers[i] drawAtPoint:NSMakePoint(margin + cols[i] + 2, y + 2) withAttributes:hdrAttrs];
     }
