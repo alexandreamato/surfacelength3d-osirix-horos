@@ -28,8 +28,12 @@ xcuserdata/
 *.mov
 *.zip
 
-# Original large GIF (use demo.gif instead)
+# Original large media files (use demo.gif instead)
 3d surface length.gif
+*.mp4
+
+# Claude Code project instructions (local dev tool)
+CLAUDE.md
 
 # Compiled AppleScript bytecode
 *.scpt
