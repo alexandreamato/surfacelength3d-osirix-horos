@@ -1,5 +1,6 @@
 #import "MeasurementExporter.h"
 #import "PointPair.h"
+#import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
 
 @implementation MeasurementExporter
 
@@ -15,7 +16,15 @@
     NSSavePanel *panel  = [NSSavePanel savePanel];
     panel.title         = NSLocalizedString(@"Export Measurements (CSV)", nil);
     panel.nameFieldStringValue = [self defaultFilenameWithExtension:@"csv" patientID:patientID];
-    panel.allowedFileTypes     = @[@"csv"];
+    if (@available(macOS 11.0, *)) {
+        UTType *csvType = [UTType typeWithFilenameExtension:@"csv"];
+        panel.allowedContentTypes = csvType ? @[csvType] : @[UTTypePlainText];
+    } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        panel.allowedFileTypes = @[@"csv"];
+#pragma clang diagnostic pop
+    }
 
     [panel beginSheetModalForWindow:window completionHandler:^(NSModalResponse result) {
         if (result != NSModalResponseOK) { if (completion) completion(nil, nil); return; }
@@ -79,7 +88,14 @@
     NSSavePanel *panel  = [NSSavePanel savePanel];
     panel.title         = NSLocalizedString(@"Export Report (PDF)", nil);
     panel.nameFieldStringValue = [self defaultFilenameWithExtension:@"pdf" patientID:patientID];
-    panel.allowedFileTypes     = @[@"pdf"];
+    if (@available(macOS 11.0, *)) {
+        panel.allowedContentTypes = @[UTTypePDF];
+    } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        panel.allowedFileTypes = @[@"pdf"];
+#pragma clang diagnostic pop
+    }
 
     [panel beginSheetModalForWindow:window completionHandler:^(NSModalResponse result) {
         if (result != NSModalResponseOK) { if (completion) completion(nil, nil); return; }
@@ -145,6 +161,34 @@
     };
     [@"⚠ For research use only. Algorithm requires phantom validation before clinical use." drawAtPoint:NSMakePoint(margin, y) withAttributes:warnAttrs];
     y += 20;
+
+    NSInteger calcCount = 0;
+    double ratioSum = 0.0, maxSurface = 0.0;
+    for (PointPair *pp in pairs) {
+        if (pp.state != PointPairStateCalculated) continue;
+        calcCount++;
+        ratioSum += pp.distanceRatio;
+        if (pp.distanceSurface > maxSurface) maxSurface = pp.distanceSurface;
+    }
+    double meanRatio = calcCount > 0 ? (ratioSum / (double)calcCount) : 0.0;
+
+    NSDictionary *summaryTitleAttrs = @{
+        NSFontAttributeName: [NSFont boldSystemFontOfSize:11],
+        NSForegroundColorAttributeName: [NSColor blackColor]
+    };
+    NSDictionary *summaryAttrs = @{
+        NSFontAttributeName: [NSFont systemFontOfSize:10],
+        NSForegroundColorAttributeName: [NSColor colorWithWhite:0.2 alpha:1.0]
+    };
+    NSRect summaryRect = NSMakeRect(margin, y, width, 40);
+    [[NSColor colorWithWhite:0.96 alpha:1.0] setFill];
+    NSRectFill(summaryRect);
+    [@"Summary" drawAtPoint:NSMakePoint(margin + 6, y + 5) withAttributes:summaryTitleAttrs];
+    [[NSString stringWithFormat:@"Calculated paths: %ld   Max surface: %.1f mm   Mean ratio: x%.2f",
+                                 (long)calcCount, maxSurface, meanRatio]
+        drawAtPoint:NSMakePoint(margin + 78, y + 6)
+      withAttributes:summaryAttrs];
+    y += 48;
 
     // --- Report view snapshot ---
     CGFloat imgSize = MIN(width, 260);

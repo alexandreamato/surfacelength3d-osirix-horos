@@ -136,6 +136,34 @@
     return [NSString stringWithFormat:@"Point %ld", (long)(roiIndex + 1)];
 }
 
+- (NSInteger)calculatedPairCount {
+    NSInteger count = 0;
+    for (PointPair *pp in self.filter.pairsResultsArray) {
+        if (pp.state == PointPairStateCalculated) count++;
+    }
+    return count;
+}
+
+- (double)meanDistanceRatio {
+    double sum = 0.0;
+    NSInteger count = 0;
+    for (PointPair *pp in self.filter.pairsResultsArray) {
+        if (pp.state != PointPairStateCalculated) continue;
+        sum += pp.distanceRatio;
+        count++;
+    }
+    return count > 0 ? (sum / (double)count) : 0.0;
+}
+
+- (double)maxSurfaceDistance {
+    double max = 0.0;
+    for (PointPair *pp in self.filter.pairsResultsArray) {
+        if (pp.state != PointPairStateCalculated) continue;
+        if (pp.distanceSurface > max) max = pp.distanceSurface;
+    }
+    return max;
+}
+
 // ---------------------------------------------------------------------------
 #pragma mark - Actions
 // ---------------------------------------------------------------------------

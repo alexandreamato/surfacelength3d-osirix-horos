@@ -48,6 +48,10 @@
 
 @implementation ValidationPhantomResult
 
+- (BOOL)available {
+    return self.testCases.count > 0;
+}
+
 - (double)meanPercentError {
     if (!self.testCases.count) return 0;
     double sum = 0;

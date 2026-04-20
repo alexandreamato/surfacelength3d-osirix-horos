@@ -10,6 +10,7 @@
 
 static const CGFloat kMarkerDiameter = 10.0;
 static const CGFloat kLineWidth      = 2.0;
+static const CGFloat kSummaryInset   = 12.0;
 
 @implementation ReportView
 
@@ -71,6 +72,8 @@ static const CGFloat kLineWidth      = 2.0;
                                    NSForegroundColorAttributeName: [NSColor blackColor] };
     NSDictionary *distAttrs   = @{ NSFontAttributeName: [NSFont systemFontOfSize:10],
                                    NSForegroundColorAttributeName: [NSColor darkGrayColor] };
+    NSDictionary *summaryAttrs = @{ NSFontAttributeName: [NSFont systemFontOfSize:11],
+                                    NSForegroundColorAttributeName: [NSColor colorWithWhite:0.15 alpha:1.0] };
 
     // Draw lines and points from the centre to each connected point
     for (PointPair *pp in results) {
@@ -146,6 +149,41 @@ static const CGFloat kLineWidth      = 2.0;
     NSMutableDictionary *redLabel = [labelAttrs mutableCopy];
     redLabel[NSForegroundColorAttributeName] = [NSColor systemRedColor];
     [centreName drawAtPoint:NSMakePoint(centre.x - 20, centre.y - 22) withAttributes:redLabel];
+
+    // Summary box
+    NSRect summaryRect = NSMakeRect(kSummaryInset, NSHeight(bounds) - 88.0, 220.0, 76.0);
+    [[NSColor colorWithWhite:1.0 alpha:0.82] setFill];
+    [[NSBezierPath bezierPathWithRoundedRect:summaryRect xRadius:8 yRadius:8] fill];
+    NSDictionary *titleAttrs = @{ NSFontAttributeName: [NSFont boldSystemFontOfSize:11],
+                                  NSForegroundColorAttributeName: [NSColor blackColor] };
+    [@"Summary" drawAtPoint:NSMakePoint(NSMinX(summaryRect) + 10, NSMinY(summaryRect) + 54)
+             withAttributes:titleAttrs];
+    [[NSString stringWithFormat:@"Centre: %@", centreName]
+        drawAtPoint:NSMakePoint(NSMinX(summaryRect) + 10, NSMinY(summaryRect) + 38)
+      withAttributes:summaryAttrs];
+    [[NSString stringWithFormat:@"Calculated paths: %ld", (long)[wc calculatedPairCount]]
+        drawAtPoint:NSMakePoint(NSMinX(summaryRect) + 10, NSMinY(summaryRect) + 24)
+      withAttributes:summaryAttrs];
+    [[NSString stringWithFormat:@"Max surface: %.1f mm   Mean ratio: x%.2f",
+                                 [wc maxSurfaceDistance], [wc meanDistanceRatio]]
+        drawAtPoint:NSMakePoint(NSMinX(summaryRect) + 10, NSMinY(summaryRect) + 10)
+      withAttributes:summaryAttrs];
+
+    NSRect legendRect = NSMakeRect(NSMaxX(bounds) - 220.0 - kSummaryInset, NSHeight(bounds) - 88.0, 220.0, 76.0);
+    [[NSColor colorWithWhite:1.0 alpha:0.82] setFill];
+    [[NSBezierPath bezierPathWithRoundedRect:legendRect xRadius:8 yRadius:8] fill];
+    [@"Legend" drawAtPoint:NSMakePoint(NSMinX(legendRect) + 10, NSMinY(legendRect) + 54)
+            withAttributes:titleAttrs];
+    [[NSColor systemRedColor] setFill];
+    [[NSBezierPath bezierPathWithOvalInRect:NSMakeRect(NSMinX(legendRect) + 10, NSMinY(legendRect) + 36, 8, 8)] fill];
+    [@"Selected centre" drawAtPoint:NSMakePoint(NSMinX(legendRect) + 24, NSMinY(legendRect) + 32)
+                     withAttributes:summaryAttrs];
+    [[NSColor systemBlueColor] setFill];
+    [[NSBezierPath bezierPathWithOvalInRect:NSMakeRect(NSMinX(legendRect) + 10, NSMinY(legendRect) + 22, 8, 8)] fill];
+    [@"Connected landmark" drawAtPoint:NSMakePoint(NSMinX(legendRect) + 24, NSMinY(legendRect) + 18)
+                        withAttributes:summaryAttrs];
+    [@"Dashed line = wraps behind centre" drawAtPoint:NSMakePoint(NSMinX(legendRect) + 10, NSMinY(legendRect) + 4)
+                                       withAttributes:summaryAttrs];
 
     // If "All" selected, draw inter-point paths (dashed if they wrap around the back)
     if (!plotAll) return;

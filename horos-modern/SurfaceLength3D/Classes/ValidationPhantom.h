@@ -32,6 +32,7 @@ typedef NS_ENUM(NSInteger, PhantomShape) {
 @property (nonatomic, readonly) double meanPercentError;
 @property (nonatomic, readonly) double maxPercentError;
 @property (nonatomic, readonly, copy) NSString *summary;
+@property (nonatomic, readonly) BOOL available;
 @end
 
 @interface ValidationPhantom : NSObject

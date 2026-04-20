@@ -19,9 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) double pathLineWidth;
 
-- (instancetype)initWithViewerController:(ViewerController *)vc
-                        windowController:(ProcessWindowController *)wc
-                            pluginFilter:(SurfaceLength3DFilter *)filter NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithViewerController:(nullable ViewerController *)vc
+                        windowController:(nullable ProcessWindowController *)wc
+                            pluginFilter:(nullable SurfaceLength3DFilter *)filter NS_DESIGNATED_INITIALIZER;
 
 /// Returns info dicts for all VTK actors with enough vertices to be surfaces.
 /// Keys: @"index" (NSInteger), @"vertices" (NSInteger), @"label" (NSString).

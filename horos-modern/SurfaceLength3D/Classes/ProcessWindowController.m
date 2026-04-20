@@ -390,8 +390,12 @@
                           meshResolution:64
                               completion:^(ValidationPhantomResult *cylResult) {
             btn.enabled = YES;
-            NSString *msg = [NSString stringWithFormat:@"%@\n\n%@",
-                             sphereResult.summary, cylResult.summary];
+            NSMutableString *msg = [NSMutableString string];
+            if (!sphereResult.available || !cylResult.available) {
+                [msg appendString:@"Validation phantom is currently unavailable inside the Horos runtime because Horos embeds VTK 8 while this plugin is compiled against VTK 9 headers.\n\n"];
+                [msg appendString:@"The production geodesic path pipeline remains active, but analytic phantom verification still needs either a standalone build or a future Horos-safe validation backend.\n\n"];
+            }
+            [msg appendFormat:@"%@\n\n%@", sphereResult.summary, cylResult.summary];
             NSAlert *alert = [[NSAlert alloc] init];
             alert.messageText     = NSLocalizedString(@"Geometric Phantom Validation", nil);
             alert.informativeText = msg;

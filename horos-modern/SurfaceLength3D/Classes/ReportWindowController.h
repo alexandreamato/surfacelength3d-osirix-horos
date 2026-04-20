@@ -8,6 +8,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ReportWindowController : NSWindowController
 
+- (instancetype)initWithWindow:(nullable NSWindow *)window NS_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_UNAVAILABLE;
 - (instancetype)initWithViewer:(ViewerController *)viewer
                   pluginFilter:(SurfaceLength3DFilter *)filter NS_DESIGNATED_INITIALIZER;
 
@@ -18,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable NSString *)nameOfSelectedCentrePoint;
 - (NSString *)displayNameForROIIndex:(NSInteger)roiIndex;
+- (NSInteger)calculatedPairCount;
+- (double)meanDistanceRatio;
+- (double)maxSurfaceDistance;
 - (ViewerController *)viewerController;
 - (SurfaceLength3DFilter *)filter;
 

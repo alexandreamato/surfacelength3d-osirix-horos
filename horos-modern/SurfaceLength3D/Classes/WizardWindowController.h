@@ -9,6 +9,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WizardWindowController : NSWindowController
 
+- (instancetype)initWithWindow:(nullable NSWindow *)window NS_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_UNAVAILABLE;
 - (instancetype)initWithViewer:(ViewerController *)viewer
                   pluginFilter:(SurfaceLength3DFilter *)filter NS_DESIGNATED_INITIALIZER;
 
