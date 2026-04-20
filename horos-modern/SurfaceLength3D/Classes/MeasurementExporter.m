@@ -35,8 +35,12 @@
     df.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     [s appendFormat:@"# Surface Length 3D — Measurement Export\n"];
     [s appendFormat:@"# Date: %@\n", [df stringFromDate:[NSDate date]]];
-    if (patientID.length) [s appendFormat:@"# Patient: %@\n", patientID];
-    [s appendString:@"# Algorithm: vtkDijkstraGraphGeodesicPath\n"];
+    if (patientID.length) {
+        NSString *safeID = [[patientID componentsSeparatedByCharactersInSet:
+                             [NSCharacterSet newlineCharacterSet]] componentsJoinedByString:@" "];
+        [s appendFormat:@"# Patient: %@\n", safeID];
+    }
+    [s appendString:@"# Algorithm: Dijkstra geodesic (custom CSR)\n"];
     [s appendString:@"# NOTE: Algorithm requires phantom validation before clinical use\n#\n"];
 
     // Column headers

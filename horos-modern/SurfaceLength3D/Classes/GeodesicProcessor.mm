@@ -451,6 +451,7 @@ static std::vector<vtkIdType> SL3DDijkstra(const float *verts,
         if (u == endId) break;
         if (d > dist[(size_t)u]) continue;
 
+        if (u < 0 || u >= numPts) continue;
         float ux = verts[u*3], uy = verts[u*3+1], uz = verts[u*3+2];
         for (vtkIdType i = adj.ptr[(size_t)u]; i < adj.ptr[(size_t)(u+1)]; i++) {
             vtkIdType v = adj.list[(size_t)i];
@@ -839,6 +840,15 @@ static const NSInteger kMaxPaths = 200;
     vtkIdType numPts = maxVertId + 1;
     NSLog(@"[SL3D] mesh copy: numPts=%lld numPolys=%lld polyBufElems=%lld",
           (long long)numPts, (long long)numPolys, (long long)totalPolyBufSize);
+
+    // Guard against integer overflow before multiplying untrusted mesh dimensions
+    const vtkIdType kMaxSafePts = (vtkIdType)(SIZE_MAX / (3 * sizeof(float)));
+    const vtkIdType kMaxSafePoly = (vtkIdType)(SIZE_MAX / sizeof(vtkIdType));
+    if (numPts <= 0 || numPts > kMaxSafePts || totalPolyBufSize <= 0 || totalPolyBufSize > kMaxSafePoly) {
+        NSLog(@"[SL3D] processAll: mesh dimensions out of safe range — aborting");
+        if (completion) dispatch_async(dispatch_get_main_queue(), completion);
+        return;
+    }
 
     // Deep-copy — ARC-managed NSData owns the buffers; background block retains them
     NSData *copiedVerts = [NSData dataWithBytes:srcVerts

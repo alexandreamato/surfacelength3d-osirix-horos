@@ -12,6 +12,12 @@ Originally developed for OsiriX (2008, TriX Software / Gary Fielke). The modern 
 
 ---
 
+## Demo
+
+[![Surface Length 3D — demo](https://vumbnail.com/1184910898.jpg)](https://vimeo.com/1184910898/bd6a94b561)
+
+---
+
 ## Publication
 
 This plugin is described in the following peer-reviewed article:
