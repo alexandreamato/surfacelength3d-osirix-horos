@@ -28,6 +28,9 @@ xcuserdata/
 *.mov
 *.zip
 
+# Original large GIF (use demo.gif instead)
+3d surface length.gif
+
 # Compiled AppleScript bytecode
 *.scpt
 

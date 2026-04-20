@@ -14,7 +14,9 @@ Originally developed for OsiriX (2008, TriX Software / Gary Fielke). The modern 
 
 ## Demo
 
-[![Surface Length 3D — demo](https://vumbnail.com/1184910898.jpg)](https://vimeo.com/1184910898/bd6a94b561)
+![Surface Length 3D — geodesic distance measurement on 3D DICOM surface](demo.gif)
+
+▶ [Watch full video on Vimeo](https://vimeo.com/1184910898/bd6a94b561)
 
 ---
 
